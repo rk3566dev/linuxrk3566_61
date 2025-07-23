@@ -13,7 +13,7 @@
 	};
 
 	chosen: chosen {
-		bootargs = "earlycon=uart8250,mmio32,0xfe660000 console=ttyFIQ0 root=PARTUUID=614e0000-0000 rw rootwait";
+		bootargs = "earlycon=uart8250,mmio32,0xfe660000 console=ttyFIQ0 rw rootwait";
 	};
 
 	fiq-debugger {
@@ -63,6 +63,22 @@
 
 &rockchip_suspend {
 	status = "okay";
+ rockchip,sleep-mode-config = <
+        (0
+        | RKPM_SLP_CENTER_OFF
+        | RKPM_SLP_HW_PLLS_OFF
+        | RKPM_SLP_PMUALIVE_32K
+        | RKPM_SLP_PMIC_LP
+        | RKPM_SLP_32K_PVTM
+        )
+    >;
+    rockchip,wakeup-config = <
+        (0
+        | RKPM_PWM0_WKUP_EN
+        | RKPM_CPU0_WKUP_EN
+        )
+    >;
+
 };
 
 &vop {
